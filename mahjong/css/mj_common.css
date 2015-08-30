@@ -1,0 +1,205 @@
+﻿html, body{
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    font-family: 'MS PGothic', Osaka, Arial, sans-serif;
+}
+
+body{
+    background-color:#006600;
+}
+
+button{
+    font-size: 100%;
+    font-weight: bold;
+    margin: 3%;
+    width:80%;
+    height:20%;
+    
+    background-color: #F1F1F1;
+    
+    /*影*/
+    box-shadow: 2px 2px 3px 1px #666;
+    -moz-box-shadow: 2px 2px 3px 1px #666;
+    -webkit-box-shadow: 2px 2px 3px 1px #666;
+
+    /*丸角*/
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+
+}
+
+button:hover {
+    background-color: gray;
+    color: white;
+}
+
+#menuArea{
+    position: absolute;
+    width: 100%;
+    height: 25px;
+    z-index: 100;
+}
+
+#menuArea ul {
+    margin: 0px;
+    padding: 0px;
+}
+
+#menuArea li {
+    list-style: none;
+}
+
+#menuArea a {
+    font-size: 13px;
+    text-decoration: none;
+}
+
+#menuArea > ul > li {
+    position: relative;
+    float: left;
+    width: 24%;
+    margin: 0 1px;
+}
+
+#menuArea > ul > li > a {
+    display: block;
+    height: 22px;
+    background-color: #FFFFFF;
+    line-height: 22px;
+    text-align: center;
+}
+
+li.color-blue {
+    border-top: 3px solid #3FC6F3;
+}
+
+li.color-red {
+    border-top: 3px solid #FF625F;
+}
+
+li.color-yellow {
+    border-top: 3px solid #FEBD01;
+}
+
+li.color-green {
+    border-top: 3px solid #46D7C6;
+}
+
+ul.subs {
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    background-color: #FFFFFF;
+}
+
+ul.subs li a {
+    display: block;
+    height: 22px;
+    background-color: #FFFFFF;
+    line-height: 22px;
+    text-indent: 10%;
+}
+
+li.color-blue ul.subs li a:hover {
+    background-color: #3FC6F3;
+    color: #FFFFFF;
+}
+
+li.color-red ul.subs li a:hover {
+    background-color: #FF625F;
+    color: #FFFFFF;
+}
+
+li.color-yellow ul.subs li a:hover {
+    background-color: #FEBD01;
+    color: #FFFFFF;
+}
+
+li.color-green ul.subs li a:hover {
+    background-color: #46D7C6;
+    color: #FFFFFF;
+}
+
+#mainArea{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+#wanpaiUeArea{
+    position:absolute;
+    top:2%;
+    left:27.5%;
+    margin-top: 30px;
+    z-index: 1;
+}
+
+#wanpaiShitaArea{
+    position:absolute;
+    top:5.8%;
+    left:27.5%;
+    margin-top: 30px;
+    z-index: 0;
+}
+
+#sutehaiArea{
+    position:absolute;
+    top:20%;
+    left:30%;
+    margin-top: 30px;
+    width:35%;
+    height:55%;
+}
+
+#nakiButtonArea{
+    position:absolute;
+    top:60%;
+    left:85%;
+    width:10%;
+    height:22%;
+}
+
+#tehaiArea{
+    position:absolute;
+    top:82%;
+    margin:0% 0% 0% 5%;
+    z-index: 10;
+}
+
+#nakihaiArea{
+    position:absolute;
+    bottom:1%;
+    right:1%;
+}
+
+.hai{
+    float:left;
+    padding:0px 0px;
+    
+    /*丸角*/
+    -moz-border-radius: 35px;
+    -webkit-border-radius: 35px;
+    border-radius: 35px;
+}
+
+.selected{
+    border: 15px solid #ff0000;
+    margin: -15px 0;
+}
+
+.kan{
+    border: 15px solid #0000ff;
+    margin: -15px 0;
+}
+
+.nakihai{
+    float:right;
+
+    /*丸角*/
+    -moz-border-radius: 35px;
+    -webkit-border-radius: 35px;
+    border-radius: 35px;
+}

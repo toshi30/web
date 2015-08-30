@@ -1,0 +1,24 @@
+.hai{
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+}
+
+.selected{
+    border: 3px solid #ff0000;
+    margin: -3px 0;
+}
+
+.kan{
+    border: 3px solid #0000ff;
+    margin: -3px 0;
+}
+
+.nakihai{
+    float:right;
+
+    /*丸角*/
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+}
