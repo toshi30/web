@@ -180,26 +180,26 @@ li.color-green ul.subs li a:hover {
     padding:0px 0px;
     
     /*丸角*/
-    -moz-border-radius: 35px;
-    -webkit-border-radius: 35px;
-    border-radius: 35px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
 }
 
 .selected{
-    border: 15px solid #ff0000;
-    margin: -15px 0;
+    border: 3px solid #ff0000;
+    margin: -3px 0;
 }
 
 .kan{
-    border: 15px solid #0000ff;
-    margin: -15px 0;
+    border: 3px solid #0000ff;
+    margin: -3px 0;
 }
 
 .nakihai{
     float:right;
 
     /*丸角*/
-    -moz-border-radius: 35px;
-    -webkit-border-radius: 35px;
-    border-radius: 35px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
 }
