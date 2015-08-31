@@ -20,3 +20,5 @@ function clearApply(){
   displayPanel.textContent = "";
   textBox.value = "";
 }
+
+
