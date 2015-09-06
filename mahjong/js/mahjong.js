@@ -1,5 +1,5 @@
 ﻿//*****デバッグ用 配牌*****
-//var dummy = [5,6,6,7,7,11,11,19,19,21,21,39,39,5];
+//var dummy = [1,2,3,4,5,6,7,11,19,21,29,31,39,1];
 //*************************
 
 
@@ -74,17 +74,26 @@ $(function(){
         tehai[i] = selectHai();
     };
 
-//*****デバッグ用 配牌*****
-//tehai.length = 0;
-//for(var i = 0; i < 13; i++){
-//tehai.push(dummy[i])
-//}
-//*************************
+    //*****デバッグ用 配牌*****
+    //tehai.length = 0;
+    //for(var i = 0; i < 13; i++){
+    //tehai.push(dummy[i])
+    //}
+    //*************************
 
     setTehai();
 
     //第一自摸
     setTsumo();
+
+    //打牌候補の手牌の処理
+    $("#tehaiArea .hai").hover(function (){
+        //マウスオーバー時
+        $(this).stop().animate({marginTop:"-10px"},50);
+    },function(){
+        //マウスアウト時
+        $(this).stop().animate({marginTop:"-0px"},50);
+    });
 
     //打牌後、画面クリックで自摸
     document.body.onclick = tsumo;
@@ -175,42 +184,33 @@ function dahai(event){
 //王牌をセット
 function setWanpai(){
     //王牌削除
-    var wanpaiUeArea = document.getElementById("wanpaiUeArea");
-    for (var i = wanpaiUeArea.childNodes.length - 1; i >= 0; i--) {
-        wanpaiUeArea.removeChild(wanpaiUeArea.childNodes[i]);
-    };
-    
-    var wanpaiShitaArea = document.getElementById("wanpaiShitaArea");
-    for (var i = wanpaiShitaArea.childNodes.length - 1; i >= 0; i--) {
-        wanpaiShitaArea.removeChild(wanpaiShitaArea.childNodes[i]);
-    };
-    
+    $("#wanpaiUeArea").empty();
+    $("#wanpaiShitaArea").empty();    
+
     //上山の数調整
     if(kanzumihai.length == 2) dora[7] = 99;
     else if(kanzumihai.length == 4) dora[8] = 99;
 
     //上山配置
     for(var k = 0; k < (dora.length); k++){
-        var img = document.createElement("img");
-        img.setAttribute("id", "dora" + k);
-        showImg(img,dora[k]);
-        img.className = "hai";
+        var img = createHaiImg("dora" + k , dora[k]);
+        $(img).attr("class" , "hai");
 
         if(kanzumihai.length == 1 | kanzumihai.length == 2){
             if(k == 0){
                 continue;
             }else if(k == 1){
-                img.style.marginLeft = (bodyWidth / 18) + "px";
+                $(img).css("margin-left" , (bodyWidth / 18) + "px");
             }
         }else if(kanzumihai.length == 3 | kanzumihai.length == 4){
             if(k == 0 | k == 1){
                 continue;
             }else if(k == 2){
-                img.style.marginLeft = (bodyWidth / 9) + "px";
+                $(img).css("margin-left" , (bodyWidth / 9) + "px");
             }
         }
 
-        wanpaiUeArea.appendChild(img);
+        $("#wanpaiUeArea").append(img);
     }
 
     //下山の数調整
@@ -219,27 +219,24 @@ function setWanpai(){
 
     //王牌 下山配置
     for(var k = 0; k < uradora.length; k++){
-        var img = document.createElement("img");
-        img.setAttribute("id", "uradora" + k);
-        
-        showImg(img,99);
-        img.className = "hai";
-        
+        var img = createHaiImg("uradora" + k , 99);
+        $(img).attr("class" , "hai");
+
         if(kanzumihai.length == 2 | kanzumihai.length == 3){
             if(k == 0){
                 continue;
             }else if(k == 1){
-                img.style.marginLeft = (bodyWidth / 18) + "px";
+                $(img).css("margin-left" , (bodyWidth / 18) + "px");
             }
         }else if(kanzumihai.length == 4){
             if(k == 0 | k == 1){
                 continue;
             }else if(k == 2){
-                img.style.marginLeft = (bodyWidth / 9) + "px";
+                $(img).css("margin-left" , (bodyWidth / 9) + "px");                
             }
         }
         
-        wanpaiShitaArea.appendChild(img);
+        $("#wanpaiShitaArea").append(img);
     }
 }
 
@@ -250,20 +247,13 @@ function setTehai(){
     tehai.sort(function(a,b){ return a-b; });
 
     //手牌削除
-    //var tehaiArea = document.getElementById("tehaiArea");
-    //for (var i = tehaiArea.childNodes.length - 1; i >= 0; i--) {
-    //    tehaiArea.removeChild(tehaiArea.childNodes[i]);
-    //};
     $("#tehaiArea").empty();
 
     //牌表示
     for(var j = 0; j < tehai.length; j++){
         var img = createHaiImg("tehai" + j , tehai[j]);
         
-        $(img).attr({
-            "class" : "hai"
-        });
-
+        $(img).attr("class" , "hai");
         $(img).on("click", dahai);
 
         $("#tehaiArea").append(img);
@@ -283,47 +273,36 @@ function setTsumo(){
     tehai.push(tsumohai);
 
     //自摸牌表示
-    var tehaiArea = document.getElementById("tehaiArea");
-    
-    var img = document.createElement("img");
-    img.setAttribute("id", "tsumo");
-    showImg(img,tsumohai);
+    var img = createHaiImg("tsumo" , tsumohai);
+        
+    $(img).attr("class" , "hai");
+    $(img).css("margin-left" , (bodyWidth / 100) + "px");
+    $(img).on("click", dahai);
 
-    img.className = "hai";
-    img.style.marginLeft = (bodyWidth / 100) + "px";
-    img.addEventListener("click", dahai, false);
-
-    tehaiArea.appendChild(img);
+    $("#tehaiArea").append(img);
 
     //九種九牌チェック
     if(sutehai.length == 0){
-        var kyushukyuhaiButton = document.getElementById("kyushukyuhaiButton");
-        if(check9shu9hai() == 1) kyushukyuhaiButton.style.visibility = "visible";
-        else kyushukyuhaiButton.style.visibility = "hidden";
+        if(check9shu9hai() == 1) $("#kyushukyuhaiButton").css("visibility" , "visible");
+        else $("#kyushukyuhaiButton").css("visibility" , "hidden");
     }
 
     //カン鳴きチェック
-    var kanButton = document.getElementById("kanButton");
-    if(checkKan() == 1) kanButton.style.visibility = "visible";
-    else kanButton.style.visibility = "hidden";
+    if(checkKan() == 1) $("#kanButton").css("visibility" , "visible");
+    else $("#kanButton").css("visibility" , "hidden");
 
     //自摸和了チェック
-    var tsumoButton = document.getElementById("tsumoButton");
-    if(checkTsumoAgari() == 1) tsumoButton.style.visibility = "visible";
-    else tsumoButton.style.visibility = "hidden";
-    
+    if(checkKan() == 1) $("#tsumoButton").css("visibility" , "visible");
+    else $("#tsumoButton").css("visibility" , "hidden");
 }
 
 
 //捨て牌をセット
 function setSutehai(hai){
-    var sutehaiArea = document.getElementById("sutehaiArea");
+    var img = createHaiImg("sutehai" + (sutehai.length - 1) , hai);
+    $(img).attr("class" , "hai");
 
-    var img = document.createElement("img");
-    img.setAttribute("id", "sutehai" + (sutehai.length - 1));
-    img.className = "hai";
-    showImg(img,hai);
-    sutehaiArea.appendChild(img);
+    $("#sutehaiArea").append(img);
 }
 
 
