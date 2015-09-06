@@ -30,14 +30,11 @@ var routou = [11,19,21,29,31,39];
 var yaochu = [1,2,3,4,5,6,7,11,19,21,29,31,39];
 
 
-window.onload = appInit;
-
-
 //初期処理
-function appInit(){
+$(function(){
     //画面サイズ取得
-    bodyWidth = document.body.clientWidth;
-    bodyHeight = document.body.clientHeight - 30;
+    bodyWidth = $(window).width();
+    bodyHeight = $(window).height() - 30;
 
     //残り牌を初期化
     for(var i = 0; i < 40; i++){
@@ -72,8 +69,7 @@ function appInit(){
     setWanpai();
 
     //配牌
-    var tehaiArea = document.getElementById("tehaiArea");
-
+ 
     for(var i = 0; i < 13; i++){
         tehai[i] = selectHai();
     };
@@ -94,7 +90,7 @@ function appInit(){
     document.body.onclick = tsumo;
     document.getElementById("nakiButtonArea").onclick=function(event){event.cancelBubble = true;};
     document.getElementById("tehaiArea").onclick=function(event){event.cancelBubble = true;};
-}
+});
 
 
 //画面クリック時の自摸処理
@@ -254,21 +250,23 @@ function setTehai(){
     tehai.sort(function(a,b){ return a-b; });
 
     //手牌削除
-    var tehaiArea = document.getElementById("tehaiArea");
-    for (var i = tehaiArea.childNodes.length - 1; i >= 0; i--) {
-        tehaiArea.removeChild(tehaiArea.childNodes[i]);
-    };
+    //var tehaiArea = document.getElementById("tehaiArea");
+    //for (var i = tehaiArea.childNodes.length - 1; i >= 0; i--) {
+    //    tehaiArea.removeChild(tehaiArea.childNodes[i]);
+    //};
+    $("#tehaiArea").empty();
 
     //牌表示
     for(var j = 0; j < tehai.length; j++){
-        var img = document.createElement("img");
-        img.setAttribute("id", "tehai" + j);
-        showImg(img,tehai[j]);
+        var img = createHaiImg("tehai" + j , tehai[j]);
         
-        img.className = "hai";
-        img.addEventListener("click", dahai, false);
-        
-        tehaiArea.appendChild(img);
+        $(img).attr({
+            "class" : "hai"
+        });
+
+        $(img).on("click", dahai);
+
+        $("#tehaiArea").append(img);
     }
 }
 
@@ -343,6 +341,128 @@ function setKan(kanhai){
         img.className = "nakihai";
         nakihaiArea.appendChild(img);
     }
+}
+
+
+function createHaiImg(idName , hainum){
+    var imgSrc;
+
+    switch (hainum){
+        case 1:
+            imgSrc = "./images/ton.png";
+            break;
+        case 2:
+            imgSrc = "./images/nan.png";
+            break;
+        case 3:
+            imgSrc = "./images/sha.png";
+            break;
+        case 4:
+            imgSrc = "./images/pei.png";
+            break;
+        case 5:
+            imgSrc = "./images/haku.png";
+            break;
+        case 6:
+            imgSrc = "./images/hatsu.png";
+            break;
+        case 7:
+            imgSrc = "./images/tyun.png";
+            break;
+        case 11:
+            imgSrc = "./images/1man.png";
+            break;
+        case 12:
+            imgSrc = "./images/2man.png";
+            break;
+        case 13:
+            imgSrc = "./images/3man.png";
+            break;
+        case 14:
+            imgSrc = "./images/4man.png";
+            break;
+        case 15:
+            imgSrc = "./images/5man.png";
+            break;
+        case 16:
+            imgSrc = "./images/6man.png";
+            break;
+        case 17:
+            imgSrc = "./images/7man.png";
+            break;
+        case 18:
+            imgSrc = "./images/8man.png";
+            break;
+        case 19:
+            imgSrc = "./images/9man.png";
+            break;
+        case 21:
+            imgSrc = "./images/1sou.png";
+            break;
+        case 22:
+            imgSrc = "./images/2sou.png";
+            break;
+        case 23:
+            imgSrc = "./images/3sou.png";
+            break;
+        case 24:
+            imgSrc = "./images/4sou.png";
+            break;
+        case 25:
+            imgSrc = "./images/5sou.png";
+            break;
+        case 26:
+            imgSrc = "./images/6sou.png";
+            break;
+        case 27:
+            imgSrc = "./images/7sou.png";
+            break;
+        case 28:
+            imgSrc = "./images/8sou.png";
+            break;
+        case 29:
+            imgSrc = "./images/9sou.png";
+            break;
+        case 31:
+            imgSrc = "./images/1pin.png";
+            break;
+        case 32:
+            imgSrc = "./images/2pin.png";
+            break;
+        case 33:
+            imgSrc = "./images/3pin.png";
+            break;
+        case 34:
+            imgSrc = "./images/4pin.png";
+            break;
+        case 35:
+            imgSrc = "./images/5pin.png";
+            break;
+        case 36:
+            imgSrc = "./images/6pin.png";
+            break;
+        case 37:
+            imgSrc = "./images/7pin.png";
+            break;
+        case 38:
+            imgSrc = "./images/8pin.png";
+            break;
+        case 39:
+            imgSrc = "./images/9pin.png";
+            break;
+        case 99:
+            imgSrc = "./images/fusehai.png";
+            break;
+    }
+
+    var img = $("<img>").attr({
+        "id": idName,
+        "width": bodyWidth / 18,
+        "height": bodyHeight / 6.67,
+        "src": imgSrc 
+    });
+
+    return img;
 }
 
 
