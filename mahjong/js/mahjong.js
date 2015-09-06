@@ -463,6 +463,7 @@ function createHaiImg(idName , hainum){
     });
 
     return img;
+    
 }
 
 
