@@ -86,15 +86,6 @@ $(function(){
     //第一自摸
     setTsumo();
 
-    //打牌候補の手牌の処理
-    $("#tehaiArea .hai").hover(function (){
-        //マウスオーバー時
-        $(this).stop().animate({marginTop:"-10px"},50);
-    },function(){
-        //マウスアウト時
-        $(this).stop().animate({marginTop:"-0px"},50);
-    });
-
     //打牌後、画面クリックで自摸
     document.body.onclick = tsumo;
     document.getElementById("nakiButtonArea").onclick=function(event){event.cancelBubble = true;};
@@ -144,14 +135,15 @@ function dahai(event){
     var img = document.getElementById("tehaiArea").getElementsByTagName("img");
     
     //選択済みではない場合は牌選択を修正
-    if(event.target.className.indexOf("selected") == -1){
-        for(var i = 0; i < img.length; i++){
-            img[i].className = "hai";
-        };
-
-        event.target.className = event.target.className + " selected";
-        
-    }else if(tsumoOkFlag == 0){
+    //if(event.target.className.indexOf("selected") == -1){
+    //    for(var i = 0; i < img.length; i++){
+    //        img[i].className = "hai";
+    //    };
+    //
+    //    event.target.className = event.target.className + " selected";
+    //    
+    //}else if(tsumoOkFlag == 0){
+    if (tsumoOkFlag == 0){
         //選択した打牌を捨て牌に配置
         if(event.target.id == "tsumo") {
             var num = tehai.length - 1;
@@ -281,6 +273,15 @@ function setTsumo(){
 
     $("#tehaiArea").append(img);
 
+    //打牌候補の手牌の処理
+    $("#tehaiArea .hai").hover(function (){
+        //マウスオーバー時
+        $(this).stop().animate({marginTop:"-10px"},50);
+    },function(){
+        //マウスアウト時
+        $(this).stop().animate({marginTop:"-0px"},50);
+    });
+
     //九種九牌チェック
     if(sutehai.length == 0){
         if(check9shu9hai() == 1) $("#kyushukyuhaiButton").css("visibility" , "visible");
@@ -292,7 +293,7 @@ function setTsumo(){
     else $("#kanButton").css("visibility" , "hidden");
 
     //自摸和了チェック
-    if(checkKan() == 1) $("#tsumoButton").css("visibility" , "visible");
+    if(checkTsumoAgari() == 1) $("#tsumoButton").css("visibility" , "visible");
     else $("#tsumoButton").css("visibility" , "hidden");
 }
 

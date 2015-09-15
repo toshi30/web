@@ -404,7 +404,10 @@ function checkAgari(){
 }
 
 
-//雀頭チェック
+//雀頭配列作成
+//
+//雀頭になり得る牌があれば「１牌のみ」を配列に格納（雀頭の２牌を格納する訳ではない）
+//
 function createJantouArray(array){
     var jantouArray = [];
     
@@ -424,7 +427,10 @@ function createJantouArray(array){
 }
 
 
-//刻子チェック
+//刻子配列作成
+//
+//刻子になり得る牌があれば「１牌のみ」を配列に格納（刻子の３牌を格納する訳ではない）
+//
 function createKotsuArray(array){
     var kotsuArray = [];
 
@@ -443,6 +449,9 @@ function createKotsuArray(array){
 
 
 //順子チェック
+//
+//順子になり得る牌があれば「先頭の１牌のみ」を配列に格納（４、５、６の順子であれば「４」を格納）
+//
 function createShuntsuArray(array){
     var shuntsuArray = [];
     

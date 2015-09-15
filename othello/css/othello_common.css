@@ -7,33 +7,7 @@
 }
 
 body{
-    background-color:#006600;
-}
-
-button{
-    font-size: 100%;
-    font-weight: bold;
-    margin: 3%;
-    width:80%;
-    height:20%;
-    
-    background-color: #F1F1F1;
-    
-    /*影*/
-    box-shadow: 2px 2px 3px 1px #666;
-    -moz-box-shadow: 2px 2px 3px 1px #666;
-    -webkit-box-shadow: 2px 2px 3px 1px #666;
-
-    /*丸角*/
-    border-radius: 5px;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-
-}
-
-button:hover {
-    background-color: gray;
-    color: white;
+    background-color: #006600;
 }
 
 #menuArea{
@@ -55,7 +29,7 @@ button:hover {
 #menuArea a {
     font-size: 13px;
     text-decoration: none;
-    color: #000000;    
+    color: #000000;
 }
 
 #menuArea > ul > li {
@@ -133,81 +107,37 @@ li.color-green ul.subs li a:hover {
     height: 100%;
 }
 
-#wanpaiUeArea{
-    position:absolute;
-    top:2%;
-    left:27.5%;
-    margin-top: 30px;
-    z-index: 1;
+#boardArea{
+    position: absolute;
+    top: 25px;
+    bottom: 35px;
+    right: 0;
+    left: 0;
+    margin: auto;
+    border: solid 4px #000000;
 }
 
-#wanpaiShitaArea{
-    position:absolute;
-    top:5.8%;
-    left:27.5%;
-    margin-top: 30px;
-    z-index: 0;
-}
-
-#sutehaiArea{
-    position:absolute;
-    top:20%;
-    left:30%;
-    margin-top: 30px;
-    width:35%;
-    height:55%;
-}
-
-#nakiButtonArea{
-    position:absolute;
-    top:60%;
-    left:85%;
-    width:10%;
-    height:22%;
-}
-
-#tehaiArea{
-    position:absolute;
-    top:82%;
-    margin:0% 0% 0% 5%;
-    z-index: 10;
-}
-
-#nakihaiArea{
-    position:absolute;
-    bottom:1%;
-    right:1%;
-}
-
-.hai{
+.masu{
+    width: 12.5%;
+    height: 12.5%;
     float:left;
-    padding:0px 0px;
-    
-    /*丸角*/
-    -moz-border-radius: 8px;
-    -webkit-border-radius: 8px;
-    border-radius: 8px;
+    box-sizing: border-box;
+    border: solid 2px #000000;
 }
 
-#tehaiArea .hai{
-    cursor: pointer;
+.komaImg{
+    width: 100%;
+    height: 100%;
 }
 
-.selected{
-    border: 3px solid #ff0000;
-    margin: -3px 0;
+#infoArea{
+    position: absolute;
+    width: 100%;
+    height: 35px;
+    bottom: 0;
+    text-align: center;
 }
 
-.kan{
-    border: 3px solid #0000ff;
-    margin: -10px 0 0 0;
-}
-
-.nakihai{
-    float:right;
-
-    /*丸角*/
-    -moz-border-radius: 8px;
-    -webkit-border-radius: 8px;
-    border-radius: 8px;
+#shiroTurn, #resultArea, #drawResult, #kuroResult, #shiroResult{
+    display: none;
 }
