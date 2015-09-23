@@ -1,5 +1,3 @@
-var lv = 4;
-
 var othello = [];
 var othelloTaihi = [];
 var changeCnt= 0;
@@ -10,7 +8,7 @@ var shiro = 0;
 var kuro = 0;
 var winner;
 
-var cpu = 0;
+var cpuLv = 0;
 var cpuTurn = "";
 
 $(function(){
@@ -47,31 +45,50 @@ $(function(){
 
     $("#boardArea > div > img").unbind("click");
     $("#oneButton").bind("click", function(){
-    	$("#popupArea").html("<button id='blackButton' class='popupButton'><img src='./img/k.png'>：先手</button><button id='whiteButton' class='popupButton'><img src='./img/s.png'>：後手</button>");
-    	cpu = lv;
+    	$("#popupArea").html("<select id='selectLevel'>\
+									<option>Select CPU Level</option>\
+									<option value='1'>Level 1</option>\
+									<option value='2'>Level 2</option>\
+									<option value='3'>Level 3</option>\
+									<option value='4'>Level 4</option>\
+									<option value='5'>Level 5</option>\
+									<option value='6'>Level 6</option>\
+									<option value='7'>Level 7</option>\
+									<option value='8'>Level 8</option>\
+									<option value='9'>Level 9</option>\
+									<option value='10'>Level 10</option>\
+								</select>");
 
-    	$("#blackButton").bind("click", function(){
-	    	$("#popupArea").css({"visibility": "hidden"}); 
-		  	$("#infoArea").css({"visibility": "visible"}); 
-			$("#popupArea").bind("click",popupClick);
-			$("#boardArea > div > img").bind("click", put);
-			cpuTurn = "s";
+    	$("#selectLevel").bind("change", function(){
+    		cpuLv = $("#selectLevel").val();
+	    	$("#popupArea").html("<button id='blackButton' class='popupButton'><img src='./img/k.png'>：先手</button>\
+	    						  <button id='whiteButton' class='popupButton'><img src='./img/s.png'>：後手</button>");
+
+	    	$("#blackButton").bind("click", function(){
+		    	$("#popupArea").css({"visibility": "hidden"}); 
+			  	$("#infoArea").css({"visibility": "visible"}); 
+				$("#popupArea").bind("click",popupClick);
+				$("#boardArea > div > img").bind("click", put);
+				cpuTurn = "s";
+	    	});
+
+	    	$("#whiteButton").bind("click", function(){
+		    	$("#popupArea").css({"visibility": "hidden"}); 
+			  	$("#infoArea").css({"visibility": "visible"}); 
+				$("#popupArea").bind("click",popupClick);
+				$("#boardArea > div > img").bind("click", put);
+				cpuTurn = "k";
+
+				//CPUのターン
+		    	if(cpuLv > 0 && cpuTurn == turn){
+					setTimeout(function(){
+						afterPut(cpuThink(cpuLv));
+					},1000);
+				}
+	    	});
     	});
 
-    	$("#whiteButton").bind("click", function(){
-	    	$("#popupArea").css({"visibility": "hidden"}); 
-		  	$("#infoArea").css({"visibility": "visible"}); 
-			$("#popupArea").bind("click",popupClick);
-			$("#boardArea > div > img").bind("click", put);
-			cpuTurn = "k";
 
-			//CPUのターン
-	    	if(cpu > 0 && cpuTurn == turn){
-				setTimeout(function(){
-					afterPut(cpuThink(cpu));
-				},1000);
-			}
-    	});
     });
 
     $("#twoButton").bind("click", function(){
@@ -118,9 +135,9 @@ function put(event){
     	afterPut(idNum);
 
     	//CPU対戦の場合次のCPUのターン
-    	if(cpu > 0 && cpuTurn == turn){
+    	if(cpuLv > 0 && cpuTurn == turn){
 			setTimeout(function(){
-				afterPut(cpuThink(cpu));
+				afterPut(cpuThink(cpuLv));
 			},500);    		
     	}
     }
@@ -129,7 +146,6 @@ function put(event){
 function checkPut(idNum){
 
     var putOkFlg = 0;
-    changeCnt = 0;
 
     for(var i = 0; i < 64; i++){
 	    othelloTaihi[i] = "";
@@ -145,7 +161,6 @@ function checkPut(idNum){
     			}else if(othello[i] == turn){
     				for(var k = i; k <= idNum; k = k+9){
     					othelloTaihi[k] = turn;
-    					changeCnt = changeCnt + 1;
     				}
 
     				putOkFlg = 1;
@@ -164,7 +179,6 @@ function checkPut(idNum){
     			}else if(othello[i] == turn){
     				for(var k = i; k <= idNum; k = k+7){
     					othelloTaihi[k] = turn;
-    					changeCnt = changeCnt + 1;
     				}
 
     				putOkFlg = 1;
@@ -183,7 +197,6 @@ function checkPut(idNum){
     			}else if(othello[i] == turn){
     				for(var k = i; k >= idNum; k = k-7){
     					othelloTaihi[k] = turn;
-    					changeCnt = changeCnt + 1;
     				}
 
     				putOkFlg = 1;
@@ -202,7 +215,6 @@ function checkPut(idNum){
     			}else if(othello[i] == turn){
     				for(var k = i; k >= idNum; k = k-9){
     					othelloTaihi[k] = turn;
-    					changeCnt = changeCnt + 1;
     				}
 
     				putOkFlg = 1;
@@ -221,7 +233,6 @@ function checkPut(idNum){
     			}else if(othello[i] == turn){
     				for(var k = i; k <= idNum; k = k+8){
     					othelloTaihi[k] = turn;
-    					changeCnt = changeCnt + 1;
     				}
 
     				putOkFlg = 1;
@@ -240,7 +251,6 @@ function checkPut(idNum){
     			}else if(othello[i] == turn){
     				for(var k = i; k >= idNum; k = k-8){
     					othelloTaihi[k] = turn;
-    					changeCnt = changeCnt + 1;
     				}
 
     				putOkFlg = 1;
@@ -261,7 +271,6 @@ function checkPut(idNum){
     			}else if(othello[i] == turn){
     				for(var k = i; k <= idNum; k = k+1){
     					othelloTaihi[k] = turn;
-    					changeCnt = changeCnt + 1;
     				}
 
     				putOkFlg = 1;
@@ -280,7 +289,6 @@ function checkPut(idNum){
     			}else if(othello[i] == turn){
     				for(var k = i; k >= idNum; k = k-1){
     					othelloTaihi[k] = turn;
-    					changeCnt = changeCnt + 1;
     				}
 
     				putOkFlg = 1;

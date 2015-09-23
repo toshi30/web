@@ -1,5 +1,4 @@
 function cpuThink(level) {
-
 	//置ける場所を全て配列に格納
 	var putableArray = [];
 	var changeCntArray = [];
@@ -7,6 +6,13 @@ function cpuThink(level) {
 	for(var i = 0; i < 64; i++){
 	    if(checkPut(i) == 1) {
 	    	putableArray.push(i);
+
+	    	changeCnt = 0;
+
+	    	for(var k = 0; k < 64; k++){
+	    		if(othelloTaihi[k] !="" && othello[k] != othelloTaihi[k]) changeCnt = changeCnt + 1;
+	    	}
+
 	    	changeCntArray.push(changeCnt);
 	    }
 	}
@@ -85,7 +91,7 @@ function cpuThink(level) {
 
 	//******************
 	//CPU Level 4
-	//一番ひっくり返す数が小さいところに置く
+	//一番ひっくり返す数が大きいところに置く
 	//ただし即角取られるところには置かない
 	//******************
 	else if(level == 4){
@@ -104,7 +110,7 @@ function cpuThink(level) {
 		    }
 		}
 
-		if(tmpPutableArray.lenght == 0){
+		if(tmpPutableArray.length == 0){
 			for(var i = 0; i < putableArray.length; i++){
 				tmpPutableArray.push(putableArray[i]);
 				tmpChangeCntArray.push(changeCntArray[i]);
@@ -134,4 +140,58 @@ function cpuThink(level) {
 		}
 
 	}
+
+	//******************
+	//CPU Level 5
+	//一番ひっくり返す数が小さいところに置く
+	//ただし即角取られるところには置かない
+	//******************
+	else if(level == 5){
+
+		var tmpPutableArray = [];
+		var tmpChangeCntArray = [];
+
+		for(var i = 0; i < putableArray.length; i++){
+			var num = putableArray[i];
+
+		    if(num != 1 && num != 6 && num != 8 && num != 9 && num != 14 && num != 15
+		    	 && num != 48 && num != 49 && num != 54 && num != 55 && num != 57 && num != 62){
+
+		    	tmpPutableArray.push(num);
+		    	tmpChangeCntArray.push(changeCntArray[i]);
+		    }
+		}
+
+		if(tmpPutableArray.length == 0){
+			for(var i = 0; i < putableArray.length; i++){
+				tmpPutableArray.push(putableArray[i]);
+				tmpChangeCntArray.push(changeCntArray[i]);
+			}
+		} 
+
+		var lv5Array = [];
+
+		lv5Array.push(tmpPutableArray[0]);
+		var minCnt = tmpChangeCntArray[0];
+
+		for(var i = 1; i < tmpChangeCntArray.length; i++){
+			if(minCnt > tmpChangeCntArray[i]){
+				lv5Array = [];
+				lv5Array.push(tmpPutableArray[i]);
+				minCnt = tmpChangeCntArray[i];
+			} else if (minCnt == tmpChangeCntArray[i]){
+				lv5Array.push(tmpPutableArray[i]);
+			}
+		}
+
+		if(lv5Array.length == 1){
+		    return lv5Array[0];	
+		} else {
+		    var random = Math.floor( Math.random() * lv5Array.length );
+		    return lv5Array[random];
+		}
+
+	}
+
+
 }

@@ -161,7 +161,6 @@ li.color-green ul.subs li a:hover {
     border: 5px ridge #ff4500; 
     font-size: 26px;
     text-align: center;
-    /*visibility: hidden;*/
 }
 
 #popupArea span {
@@ -221,4 +220,16 @@ button:hover {
 #popupArea .popupButton img {
     width: 26px;
     height: 26px;
+}
+
+#selectLevel {
+    position: absolute;
+    width: 60%;
+    height: 30%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    font-size: 18px;
 }
