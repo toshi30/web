@@ -1,11 +1,17 @@
+var lv = 4;
+
 var othello = [];
 var othelloTaihi = [];
+var changeCnt= 0;
 var turn = "k";
 var finishFlg = 0;
 
 var shiro = 0;
 var kuro = 0;
 var winner;
+
+var cpu = 0;
+var cpuTurn = "";
 
 $(function(){
     //画面サイズ取得
@@ -39,6 +45,42 @@ $(function(){
 
     setKoma();
 
+    $("#boardArea > div > img").unbind("click");
+    $("#oneButton").bind("click", function(){
+    	$("#popupArea").html("<button id='blackButton' class='popupButton'><img src='./img/k.png'>：先手</button><button id='whiteButton' class='popupButton'><img src='./img/s.png'>：後手</button>");
+    	cpu = lv;
+
+    	$("#blackButton").bind("click", function(){
+	    	$("#popupArea").css({"visibility": "hidden"}); 
+		  	$("#infoArea").css({"visibility": "visible"}); 
+			$("#popupArea").bind("click",popupClick);
+			$("#boardArea > div > img").bind("click", put);
+			cpuTurn = "s";
+    	});
+
+    	$("#whiteButton").bind("click", function(){
+	    	$("#popupArea").css({"visibility": "hidden"}); 
+		  	$("#infoArea").css({"visibility": "visible"}); 
+			$("#popupArea").bind("click",popupClick);
+			$("#boardArea > div > img").bind("click", put);
+			cpuTurn = "k";
+
+			//CPUのターン
+	    	if(cpu > 0 && cpuTurn == turn){
+				setTimeout(function(){
+					afterPut(cpuThink(cpu));
+				},1000);
+			}
+    	});
+    });
+
+    $("#twoButton").bind("click", function(){
+    	$("#popupArea").css({"visibility": "hidden"}); 
+    	$("#infoArea").css({"visibility": "visible"}); 
+   		$("#popupArea").bind("click",popupClick);
+   		$("#boardArea > div > img").bind("click", put);
+    });
+    
 });
 
 function setKoma(){
@@ -47,8 +89,8 @@ function setKoma(){
 	for(var i = 0; i < 64; i++){
 		$("#div" + i).empty();
 
-		if(othello[i] == "s") srcImg = "./img/s.gif"
-		else if(othello[i] == "k") srcImg = "./img/k.gif"
+		if(othello[i] == "s") srcImg = "./img/s.png"
+		else if(othello[i] == "k") srcImg = "./img/k.png"
 		else srcImg = "./img/n.gif"
 
 		var img = $("<img>").attr({
@@ -67,83 +109,27 @@ function put(event){
 
     event.preventDefault();
 
+    //クリックした箇所が置けるかどうか確認
     var idNum = Number(event.target.id.substr(3));
-
     var putOkFlg = checkPut(idNum);
     
+    //置ける場合、駒をひっくり返す
     if(putOkFlg == 1){
-    	for(var i = 0; i < 64; i++){
-    		if(othelloTaihi[i] != "") othello[i] = othelloTaihi[i];
+    	afterPut(idNum);
+
+    	//CPU対戦の場合次のCPUのターン
+    	if(cpu > 0 && cpuTurn == turn){
+			setTimeout(function(){
+				afterPut(cpuThink(cpu));
+			},500);    		
     	}
-	    othello[idNum] = turn;
-
-    	if(turn == "k") {
-    		turn = "s";
-    		$("#kuroTurn").css({"display": "none"});
-    		$("#shiroTurn").css({"display": "inline"});
-    	} else {
-    		turn = "k";
-    		$("#kuroTurn").css({"display": "inline"});
-    		$("#shiroTurn").css({"display": "none"});
-    	}
-
-	    setKoma();
-
-	    //ゲームが終了したかチェック
-	    var finishChk = "";
-
-	    for(var i = 0; i < 64; i++){
-	    	finishChk = finishChk + othello[i];
-	    }
-
-	    if(finishChk.length == 64) {
-	    	finishFlg = 1;
-	    } else {
-		    for(var i = 0; i < 64; i++){
-		    	if(checkPut(i) == 1) break;
-		    }
-
-	    	if(i == 64) {
-		    	if(turn == "k") {
-		    		turn = "s";
-		    		$("#kuroTurn").css({"display": "none"});
-		    		$("#shiroTurn").css({"display": "inline"});
-		    	} else {
-		    		turn = "k";
-		    		$("#kuroTurn").css({"display": "inline"});
-		    		$("#shiroTurn").css({"display": "none"});
-		    	}
-	
-			    for(var i = 0; i < 64; i++){
-			    	if(checkPut(i) == 1) break;
-			    }
-
-		    	if(i == 64) {
-			    	finishFlg = 1;
-		    	} else {
-				    alert("パスです");
-		    	}
-	    	}
-	    }
-
-    	countStone();
-    	$("#kuroCnt").text(kuro);
-    	$("#shiroCnt").text(shiro);
-
-	    if(finishFlg == 1){
-	    	$("#turnArea").css({"display": "none"});
-	    	$("#resultArea").css({"display": "inline"});
-
-	    	if(winner == "白") $("#shiroResult").css({"display": "inline"});
-	    	else if(winner == "黒") $("#kuroResult").css({"display": "inline"});
-	    	else if(winner == "引き分け") $("#drawResult").css({"display": "inline"});
-	    }
     }
 }
 
 function checkPut(idNum){
 
     var putOkFlg = 0;
+    changeCnt = 0;
 
     for(var i = 0; i < 64; i++){
 	    othelloTaihi[i] = "";
@@ -159,6 +145,7 @@ function checkPut(idNum){
     			}else if(othello[i] == turn){
     				for(var k = i; k <= idNum; k = k+9){
     					othelloTaihi[k] = turn;
+    					changeCnt = changeCnt + 1;
     				}
 
     				putOkFlg = 1;
@@ -177,6 +164,7 @@ function checkPut(idNum){
     			}else if(othello[i] == turn){
     				for(var k = i; k <= idNum; k = k+7){
     					othelloTaihi[k] = turn;
+    					changeCnt = changeCnt + 1;
     				}
 
     				putOkFlg = 1;
@@ -195,6 +183,7 @@ function checkPut(idNum){
     			}else if(othello[i] == turn){
     				for(var k = i; k >= idNum; k = k-7){
     					othelloTaihi[k] = turn;
+    					changeCnt = changeCnt + 1;
     				}
 
     				putOkFlg = 1;
@@ -213,6 +202,7 @@ function checkPut(idNum){
     			}else if(othello[i] == turn){
     				for(var k = i; k >= idNum; k = k-9){
     					othelloTaihi[k] = turn;
+    					changeCnt = changeCnt + 1;
     				}
 
     				putOkFlg = 1;
@@ -231,6 +221,7 @@ function checkPut(idNum){
     			}else if(othello[i] == turn){
     				for(var k = i; k <= idNum; k = k+8){
     					othelloTaihi[k] = turn;
+    					changeCnt = changeCnt + 1;
     				}
 
     				putOkFlg = 1;
@@ -249,6 +240,7 @@ function checkPut(idNum){
     			}else if(othello[i] == turn){
     				for(var k = i; k >= idNum; k = k-8){
     					othelloTaihi[k] = turn;
+    					changeCnt = changeCnt + 1;
     				}
 
     				putOkFlg = 1;
@@ -269,6 +261,7 @@ function checkPut(idNum){
     			}else if(othello[i] == turn){
     				for(var k = i; k <= idNum; k = k+1){
     					othelloTaihi[k] = turn;
+    					changeCnt = changeCnt + 1;
     				}
 
     				putOkFlg = 1;
@@ -287,6 +280,7 @@ function checkPut(idNum){
     			}else if(othello[i] == turn){
     				for(var k = i; k >= idNum; k = k-1){
     					othelloTaihi[k] = turn;
+    					changeCnt = changeCnt + 1;
     				}
 
     				putOkFlg = 1;
@@ -314,4 +308,116 @@ function countStone(){
 	if(shiro > kuro) winner = "白";
 	else if(kuro > shiro) winner = "黒";
 	else winner = "引き分け";
+}
+
+function popupClick(event){
+	if(finishFlg == 1){
+		location.reload(true);
+	} else {
+		$("#turnArea").css({"display": "inline"});
+		$("#popupArea").css({"visibility": "hidden"});
+		$("#boardArea > div > img").bind("click", put);
+	}
+}
+
+function afterPut(idNum) {
+
+	//自分のものになった駒をめくる
+	checkPut(idNum);
+
+    for(var i = 0; i < 64; i++){
+		if(othelloTaihi[i] != "") othello[i] = othelloTaihi[i];
+	}
+    othello[idNum] = turn;
+
+    //ターンをチェンジ
+	if(turn == "k") {
+		turn = "s";
+		$("#kuroTurn").css({"display": "none"});
+		$("#shiroTurn").css({"display": "inline"});
+	} else {
+		turn = "k";
+		$("#kuroTurn").css({"display": "inline"});
+		$("#shiroTurn").css({"display": "none"});
+	}
+
+	//画面上の石を置き直す
+    setKoma();
+
+    //ゲームが終了したかチェック
+    var finishChk = "";
+
+    //全てのマスに駒が置かれているかチェック
+    for(var i = 0; i < 64; i++){
+    	finishChk = finishChk + othello[i];
+    }
+
+    if(finishChk.length == 64) {
+    	finishFlg = 1;
+    } else {
+    	//どのマスにも置けない
+	    for(var i = 0; i < 64; i++){
+	    	if(checkPut(i) == 1) break;
+	    }
+
+    	if(i == 64) {
+    		//ターンをチェンジして置けるマスがあるかチェック
+	    	if(turn == "k") {
+	    		turn = "s";
+	    		$("#kuroTurn").css({"display": "none"});
+	    		$("#shiroTurn").css({"display": "inline"});
+	    	} else {
+	    		turn = "k";
+	    		$("#kuroTurn").css({"display": "inline"});
+	    		$("#shiroTurn").css({"display": "none"});
+	    	}
+
+		    for(var i = 0; i < 64; i++){
+		    	if(checkPut(i) == 1) break;
+		    }
+
+	    	if(i == 64) {
+	    		//どちらのターンでも置けるますがないので終了
+		    	finishFlg = 1;
+	    	} else {
+	    		//片方が置けなかっただけなのでパス
+	    		if(turn == "s"){
+		    		$("#popupArea").html("<p><img class='popupKoma' src='./img/k.png'><span>はパスです</span></p>");
+	    		} else {
+		    		$("#popupArea").html("<p><img class='popupKoma' src='./img/s.png'><span>はパスです</span></p>");
+	    		}
+
+				$("#boardArea > div > img").unbind("click");
+	    		$("#turnArea").css({"display": "none"});
+	    		$("#popupArea").css({"visibility": "visible"});
+
+	    		setTimeout(function(){
+		    		$("#turnArea").css({"display": "inline"});
+		    		$("#popupArea").css({"visibility": "hidden"});
+	   				$("#boardArea > div > img").bind("click", put);
+	    		},2500);
+	    	}
+    	}
+    }
+
+    //現在の石を数えて更新
+	countStone();
+	$(".kuroCnt").text(kuro);
+	$(".shiroCnt").text(shiro);
+
+    if(finishFlg == 1){
+    	$("#infoArea").css({"display": "none"});
+
+    	if(winner == "白") {
+    		$("#popupArea").html("<div><img class='popupKoma' src='./img/s.png'><span>WIN!</span></div><div><span>(<img class='popupKoma' src='./img/k.png'>黒:<span class='kuroCnt'></span>&nbsp;<img class='popupKoma' src='./img/s.png'>白:<span class='shiroCnt'></span>)</span></div>");
+		} else if(winner == "黒") {
+    		$("#popupArea").html("<div><img class='popupKoma' src='./img/k.png'><span>WIN!</span></div><div><span>(<img class='popupKoma' src='./img/k.png'>黒:<span class='kuroCnt'></span>&nbsp;<img class='popupKoma' src='./img/s.png'>白:<span class='shiroCnt'></span>)</span></div>");
+    	} else if(winner == "引き分け") {
+    		$("#popupArea").html("<div><span>DRAW!</span></div><div><span>(<img class='popupKoma' src='./img/k.png'>黒:<span class='kuroCnt'></span>&nbsp;<img class='popupKoma' src='./img/s.png'>白:<span class='shiroCnt'></span>)</span></div>");
+    	}
+
+    	$(".kuroCnt").text(kuro);
+		$(".shiroCnt").text(shiro);
+    	$("#popupArea").css({"visibility": "visible"});
+    }
 }

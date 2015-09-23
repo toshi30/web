@@ -136,8 +136,89 @@ li.color-green ul.subs li a:hover {
     height: 35px;
     bottom: 0;
     text-align: center;
+    visibility: hidden;
 }
 
 #shiroTurn, #resultArea, #drawResult, #kuroResult, #shiroResult{
     display: none;
+}
+
+.infoKoma {
+    width: 15px;
+    height: 15px;
+}
+
+#popupArea {
+    position: absolute;
+    width: 60%;
+    height: 25%;
+    top: 35px;
+    bottom: 20px;
+    right: 0;
+    left: 0;
+    margin: auto;
+    background-color: rgba(255,180,0,0.90);
+    border: 5px ridge #ff4500; 
+    font-size: 26px;
+    text-align: center;
+    /*visibility: hidden;*/
+}
+
+#popupArea span {
+    vertical-align: middle;
+}
+
+#popupArea .popupKoma {
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+}
+
+#popupArea div {
+    width: 100%;
+    height: 50%;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    float: left;
+}
+
+.popupButton {
+    position: absolute;
+    width: 42%;
+    height: 45%;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    font-size: 18px;
+    cursor: pointer;
+    background-color: #f08080;
+
+    /*影*/
+    box-shadow: 2px 2px 3px 1px #666;
+    -moz-box-shadow: 2px 2px 3px 1px #666;
+    -webkit-box-shadow: 2px 2px 3px 1px #666;
+
+    /*丸角*/
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+}
+
+button:hover {
+    background-color: gray;
+    color: white;
+}
+
+#oneButton , #blackButton {
+    left: 5%;
+}
+
+#twoButton , #whiteButton {
+    right: 5%;
+}
+
+#popupArea .popupButton img {
+    width: 26px;
+    height: 26px;
 }
