@@ -1,35 +1,156 @@
 ﻿html, body{
-    width: 100%;
-    height: 100%;
-    margin: 0px;
-    padding: 0px;
-    font-family: 'MS PGothic', Osaka, Arial, sans-serif;
-    background-color: #DDFFFF;
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  font-family: 'メイリオ', Osaka, Arial, sans-serif;
+  /*background-color: #000;*/
+  background-color: #DDFFFF;
+}
+
+h1 {
+  font-size : 26px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+select {
+  font-family: 'メイリオ', Osaka, Arial, sans-serif;
 }
 
 #wrapper {
-    position: relative;
-    width: 100%;
-    height: 100%;
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
 #mainArea {
-    position: absolute;
-    width: 100%;
-    height: 100%;
+  position: absolute;
+  width: 100%;
+  height: 100%;
 }
 
 #map {
-    position: relative;
-    width: 100%;
-    height: 100%;
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
 #map > canvas {
-    position: absolute;
-    top: 27px;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    margin: auto;
+  position: absolute;
+  top: 27px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+}
+
+.pop {
+  position: absolute;
+  display:none;
+  background:url(../images/color_per.png) no-repeat 0;
+  width:70px;
+  height:28px;
+  top:200px;
+  left:100px;
+  padding:0;
+  z-index:10;
+  text-align: center;
+  line-height: 28px;
+  font-size: 12px;
+}
+
+#tripLayer{
+  position: absolute;
+  display:none;
+  background: rgba(0,0,0, 0.5);
+  width:100%;
+  height:100%;
+  top:0px;
+  bottom:0px;
+  left:0px;
+  right:0px;
+  margin: auto;
+  z-index:20;
+}
+
+.tripPop {
+  position: absolute;
+  background: rgba(245,245,245, 0.8);
+  width:80%;
+  height:80%;
+  top:0px;
+  bottom:0px;
+  left:0px;
+  right:0px;
+  margin: auto;
+  padding:0;
+}
+
+.closeImg {
+  position: absolute;
+  width:25px;
+  height:25px;
+  top:5px;
+  right:5px;
+  cursor: pointer;
+}
+
+dl{
+  margin : 0;
+}
+
+dt{
+  padding-top : 5px;  
+  padding-bottom : 5px;
+  padding-left : 10px;
+  width : 70px;
+  float : left;
+}
+ 
+dd{
+  padding-top : 5px;
+  padding-left : 10px;
+  padding-right : 10px;
+  padding-bottom : 5px;
+  margin-left : 80px;
+  margin-right : 25px;
+}
+
+.termDD {
+  position: relative;  
+}
+
+#termChk {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+}
+
+#termChk:checked + span {
+  background-image: url(../images/bg_checkbox_on.png);
+}
+
+#termChk + span {
+  display: inline;
+  background-image: url(../images/bg_checkbox_off.png);
+  background-size: 20px 20px;
+  background-position: left center;
+  background-repeat: no-repeat;
+  padding-left : 20px; 
+}
+
+.regButton {
+  width : 100px;
+  font-family: 'メイリオ', Osaka, Arial, sans-serif;
+}
+
+.histRow {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

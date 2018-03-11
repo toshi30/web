@@ -1,40 +1,88 @@
 ﻿<!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=320">
-        <title>JSオセロ</title>
-        <link rel="shortcut icon" href="favicon.ico" >
-        <link href="./css/othello_common.css" rel="stylesheet">
-        <script type="text/javascript" src="../lib/jquery-1.11.3.min.js"></script>
-        <script type="text/javascript" src="../common/menu/menu.js"></script>
-        <script type="text/javascript" src="./js/othello.js"></script>
-        <script type="text/javascript" src="./js/othelloCPU.js"></script>
-    </head>
-    <body>
-    	<div id="menuArea"></div>
-        <div id="mainArea">
-            <div id="boardArea"></div>
-            <div id="popupArea">
-                <button id="oneButton" class="popupButton">CPU</button>
-                <button id="twoButton" class="popupButton">二人対戦</button>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=320">
+    <title>JSオセロ</title>
+    <link rel="shortcut icon" href="favicon.ico" >
+    <link rel="stylesheet" href="./css/othello_common.css">
+    <link rel="stylesheet" href="../common/menu/menu.css">
+    <script src="../lib/jquery-1.11.3.min.js"></script>
+    <script src="../lib/jquery.colorbox-min.js"></script>
+    <script src="../common/menu/menu.js"></script>
+    <script src="./js/othello.js"></script>
+    <script src="./js/othelloCPU.js"></script>
+  </head>
+  <body>
+    <div id="mainArea">
+      <div id="boardArea"></div>
+
+      <div style="display:none;">
+        <div id="popupArea">
+          <div class="popupAreaCh ch1">
+            <button id="oneButton" class="popupButton">CPU</button>
+            <button id="twoButton" class="popupButton">二人対戦</button>
+          </div>
+          <div class="popupAreaCh ch2">
+            <select id="selectLevel">
+              <option value="0">Select CPU Level</option>
+              <option value="1">Level 1</option>
+              <option value="2">Level 2</option>
+              <option value="3">Level 3</option>
+              <option value="4">Level 4</option>
+              <option value="5">Level 5</option>
+              <option value="6">Level 6</option>
+              <option value="7" disabled="disabled">[作成中] Level 7</option>
+              <option value="8" disabled="disabled">[作成中] Level 8</option>
+              <option value="9" disabled="disabled">[作成中] Level 9</option>
+              <option value="10" disabled="disabled">[作成中] Level 10</option>
+            </select>
+          </div>
+          <div class="popupAreaCh ch3">
+            <button id="blackButton" class="popupButton">：先手</button>
+            <button id="whiteButton" class="popupButton">：後手</button>
+          </div>
+          <div class="popupAreaCh passArea">
+            <p><img class="popupKoma shiro" src="./img/s.png"><img class="popupKoma kuro" src="./img/k.png"><span>はパスです</span></p>
+          </div>
+          <div class="popupAreaCh resultArea">
+            <div class="winner">
+              <img class="popupKoma shiro" src="./img/s.png">
+              <img class="popupKoma kuro" src="./img/k.png">
+              <span>WIN!</span>
             </div>
-            <div id="infoArea">
-                <span id="turnArea">
-                    ターン:
-                    <span id="kuroTurn"><img id="kuroImg" class="infoKoma" src="./img/k.png">黒</span>
-                    <span id="shiroTurn"><img id="shiroImg" class="infoKoma" src="./img/s.png">白</span>
-                    &nbsp;
-                </span>
-                <span>                    
-                (
-                <img id="kuroImg" class="infoKoma" src="./img/k.png">黒:<span class="kuroCnt">2</span>
-                &nbsp;
-                <img id="shiroImg" class="infoKoma" src="./img/s.png">白:<span class="shiroCnt">2</span>
-                )
-                </span>
+            <div class="draw">
+              <span>DRAW!</span>
             </div>
+            <div class="resultStone">
+              <span>
+              <span class="kuroCnt"></span><span class="shiroCnt"></span>
+              </span>
+            </div>
+          </div>
         </div>
-    </body>
+        <!--//popupArea-->
+      </div>
+
+      <div id="infoArea">
+        <div>
+          <a href="#popupArea" class="passPopup"></a>
+          <a href="#popupArea" class="resultPopup"></a>
+          <a href="#popupArea" class="showPopup">NEW GAME</a>
+          <span id="turnArea">
+            ターン:
+            <span id="kuroTurn"></span>
+            <span id="shiroTurn"></span>
+          </span>
+          <span>
+            <span class="kuroCnt">:2</span>
+            <span class="shiroCnt">:2</span>
+          </span>
+        </div>
+      </div>
+      <!--//infoArea-->
+
+    </div>
+    <!--//mainArea-->
+  </body>
 </html>

@@ -1,0 +1,161 @@
+﻿html, body{
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", "Lucida Grande", Verdana, "ＭＳ Ｐゴシック", sans-serif;
+}
+
+body{
+  background-color: #F7F9FE;
+}
+
+#mainArea{
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+/*--- 時計エリア START ---*/
+#clock {
+  width:100%;
+  height:24px;
+  margin-top:65px;
+  text-align:center;
+}
+/*--- ルーレットエリア START ---*/
+div.roulette_container {
+  width:100%;
+  height:160px;
+  margin-top:15px;
+}
+
+div.roulette {
+  width:50%;
+  height:160px;
+  float: left;
+  margin: 0 auto;
+  background-color:rgb(253, 252, 253);
+  box-shadow:0px 0px 3px darkgray;
+  box-sizing:border-box;
+  /*border:1px solid rgba(253, 252, 253, 0.31);*/
+}
+
+div.roulette-inner {
+  width:155px;
+  height:155px;
+  margin: auto;
+}
+img.roulette_img {
+  width:100%;
+  height:100%;
+}
+
+/*--- 文字画像 START ---*/
+img.roulette_img.moji {
+  background: url("../img/aiueohyou.jpg") no-repeat;
+  background-size: 2100%;
+}
+img.roulette_img.moji_x_a {
+  background-position-x: -2956px;
+}
+img.roulette_img.moji_x_ka {
+  background-position-x: -2645px;
+}
+img.roulette_img.moji_x_sa {
+  background-position-x: -2337px;
+}
+img.roulette_img.moji_x_ta {
+  background-position-x: -2025px;
+}
+img.roulette_img.moji_x_na {
+  background-position-x: -1713px;
+}
+img.roulette_img.moji_x_ha {
+  background-position-x: -1405px;
+}
+img.roulette_img.moji_x_ma {
+  background-position-x: -1093px;
+}
+img.roulette_img.moji_x_ya {
+  background-position-x: -785px;
+}
+img.roulette_img.moji_x_ra {
+  background-position-x: -473px;
+}
+img.roulette_img.moji_x_wa {
+  background-position-x: -155px;
+}
+img.roulette_img.moji_y_1 {
+  background-position-y: -185px;
+}
+img.roulette_img.moji_y_2 {
+  background-position-y: -354px;
+}
+img.roulette_img.moji_y_3 {
+  background-position-y: -522px;
+}
+img.roulette_img.moji_y_4 {
+  background-position-y: -690px;
+}
+img.roulette_img.moji_y_5 {
+  background-position-y: -858px;
+}
+/*--- 文字画像 END ---*/
+/*--- ルーレットエリア END ---*/
+
+/*--- 結果エリア START ---*/
+div.result_container {
+  width:100%;
+  height:30px;
+  margin: 10px auto;
+  text-align: center;
+}
+/*--- 結果エリア END ---*/
+
+/*--- ボタンエリア START ---*/
+div.btn_container {
+  width:280px;
+  height:100px;
+  margin: 0 auto;
+  -webkit-tap-highlight-color:rgba(0,0,0,0);
+}
+div.btn_container_inner {
+  width:140px;
+  height:100px;
+  float: left;
+  margin: 10px auto;
+  -webkit-tap-highlight-color:rgba(0,0,0,0);
+}
+div.btn {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  -webkit-tap-highlight-color:rgba(0,0,0,0);
+}
+div.btn.start {
+  background: url("../img/btn-start-off.png") no-repeat;
+  background-size:contain;
+}
+div.btn.stop {
+  background: url("../img/btn-stop-off.png") no-repeat;
+  background-size:contain;
+}
+div.btn_container_inner.start {
+  background: url("../img/btn-start-on.png") no-repeat;
+  background-size:contain;
+  background-position:20px 0;
+}
+div.btn_container_inner.stop {
+  background: url("../img/btn-stop-on.png") no-repeat;
+  background-size:contain;
+  background-position:20px 0;
+}
+div.btn.start.hover {
+  background: url("../img/btn-start-on.png") no-repeat;
+  background-size:contain;
+}
+div.btn.stop.hover {
+  background: url("../img/btn-stop-on.png") no-repeat;
+  background-size:contain;
+}
+/*--- ボタンエリア END ---*/

@@ -1,24 +1,52 @@
 ﻿<!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=320">
-        <title>All Over the Japan</title>
-        <link rel="shortcut icon" href="favicon.ico" >
-        <script type="text/javascript" src="../lib/jquery-1.11.3.js"></script>
-        <script type="text/javascript" src="../lib/jquery.japan-map.js"></script>
-        <script type="text/javascript" src="../common/menu/menu.js"></script>
-        <script type="text/javascript" src="./js/alloverthejapan.js"></script>
-        <link href="../common/menu/menu.css" rel="stylesheet">
-        <link href="./css/jp_common.css" rel="stylesheet">
-    </head>
-    <body>
-        <div id="wrapper">
-            <div id="menuArea"></div>
-            <div id="mainArea">
-                <div id="map"></div>
-            </div>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=320">
+    <title>All Over the Japan</title>
+    <link rel="shortcut icon" href="favicon.ico" >
+    <script type="text/javascript" src="../lib/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="../lib/jquery.japan-map.update.js"></script>
+    <script type="text/javascript" src="../common/menu/menu.js"></script>
+    <script type="text/javascript" src="./js/alloverthejapan.js"></script>
+    <link href="../common/menu/menu.css" rel="stylesheet">
+    <link href="./css/jp_common.css" rel="stylesheet">
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="menuArea"></div>
+      <div id="mainArea">
+        <div id="map"></div>
+        <span id="hoverPop" class="pop"></span>
+        <div id="tripLayer">
+          <div id="tripPop" class="tripPop">
+            <input id="prefectureCode" name="prefectureCode" type="hidden">
+            <h1 id="prefectureName">北海道</h1>
+            <img src="./images/close.png" class="closeImg" onclick="tripLayerClose()">
+            <dl>
+              <dt>年月</dt>
+                <dd>
+                  <select name="yearFrom" id="yearFrom"></select>
+                  <select name="monthFrom" id="monthFrom"></select>
+                  <span id="toYearMonth" style="display:none">
+                    ~
+                    <select name="yearTo" id="yearTo"></select>
+                    <select name="monthTo" id="monthTo"></select>
+                  </span>
+                </dd>
+              <dt>期間</dt>
+                <dd term="termDD"><input id="termChk" name="termChk" type="checkbox" value="1" onClick="appearTo(this.checked)"><span></span></dd>
+              <dt>タイトル</dt><dd><input id="title" type="text" name="title" style="width:100%"></dd>
+              <dt>詳細</dt><dd><textarea id="detail" name="detail" rows="10" cols="60" style="width:100%"></textarea></dd>
+              <dt></dt><dd><input type="button" id="regButton" class="regButton" value="登録" onClick="regHistory();"></dd>
+              <div id="history">
+                <dt>履歴</dt><dd>なし</dd>
+              </div>
+            </dl>
+          </div>
         </div>
-    </body>
+      </div>
+    </div>
+  </body>
 </html>

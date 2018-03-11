@@ -1,0 +1,12 @@
+{
+  "lang": "ja",
+  "name": "カラオケお題",
+  "short_name": "カラオケお題",
+  "icons": [{
+        "src": "/karaoke/img/singer.png",
+        "sizes": "144x144",
+        "type": "image/png"
+      }],
+  "start_url": "http://anchovy.starfree.jp/karaoke/karaoke.html",
+  "display": "standalone"
+}

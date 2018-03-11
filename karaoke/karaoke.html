@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=320">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <title>カラオケお題</title>
+    <link rel="shortcut icon" href="favicon.ico" >
+    <link rel="manifest" href="manifest.json">
+    <script src="../lib/jquery-1.8.0.min.js"></script>
+    <script src="../lib/jquery-ui-1.9.0.min.js"></script>
+    <!-- menu START-->
+    <link rel="stylesheet" href="../common/menu/menu.css?20171007-3">
+    <script src="../common/menu/menu.js"></script>
+    <!-- menu END-->
+    <link rel="stylesheet" href="./css/karaoke_common.css">
+    <script src="../lib/roulette_ext.js"></script>
+    <script src="./js/karaoke.js"></script>
+    <script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.38/browser.min.js"></script>
+  </head>
+  <body>
+    <div id="mainArea">
+      <div id="clock"></div>
+      <script type="text/babel">
+      setInterval(showClock, 1000)
+
+      function showClock () {
+        const d = new Date()
+        const month = d.getMonth() + 1
+        const date = d.getDate()
+        const week = d.getDay()
+        const hour = d.getHours()
+        const min = d.getMinutes()
+        const strWeek = (v) => {
+          if(v === 0) return "日"
+          if(v === 1) return "月"
+          if(v === 2) return "火"
+          if(v === 3) return "水"
+          if(v === 4) return "木"
+          if(v === 5) return "金"
+          if(v === 6) return "土"
+        }
+        const z2 = (v) => {
+          const s = "00" + v
+          return s.substr(s.length - 2, 2)
+        }
+        const elem = <div>
+            {month}/{date}({strWeek(week)})　{z2(hour)}:{z2(min)}
+          </div>;
+        const clock = document.getElementById("clock")
+        ReactDOM.render(elem, clock)
+      }
+      </script>
+      <div class="roulette_container" >
+        <div class="roulette roulette1" style="display:none;">
+          <img class="roulette_img" src="./img/singer.png" alt="歌手名"/>
+          <img class="roulette_img" src="./img/song.png" alt="曲名"/>
+        </div>
+        <div class="roulette roulette2" style="display:none;">
+          <img class="roulette_img moji moji_x_a moji_y_1" src="./img/empty.png" alt="ア"/>
+          <img class="roulette_img moji moji_x_a moji_y_2" src="./img/empty.png" alt="イ"/>
+          <img class="roulette_img moji moji_x_a moji_y_3" src="./img/empty.png" alt="ウ"/>
+          <img class="roulette_img moji moji_x_a moji_y_4" src="./img/empty.png" alt="エ"/>
+          <img class="roulette_img moji moji_x_a moji_y_5" src="./img/empty.png" alt="オ"/>
+          <img class="roulette_img moji moji_x_ka moji_y_1" src="./img/empty.png" alt="カ(ガ)"/>
+          <img class="roulette_img moji moji_x_ka moji_y_2" src="./img/empty.png" alt="キ(ギ)"/>
+          <img class="roulette_img moji moji_x_ka moji_y_3" src="./img/empty.png" alt="ク(グ)"/>
+          <img class="roulette_img moji moji_x_ka moji_y_4" src="./img/empty.png" alt="ケ(ゲ)"/>
+          <img class="roulette_img moji moji_x_ka moji_y_5" src="./img/empty.png" alt="コ(ゴ)"/>
+          <img class="roulette_img moji moji_x_sa moji_y_1" src="./img/empty.png" alt="サ(ザ)"/>
+          <img class="roulette_img moji moji_x_sa moji_y_2" src="./img/empty.png" alt="シ(ジ)"/>
+          <img class="roulette_img moji moji_x_sa moji_y_3" src="./img/empty.png" alt="ス(ズ)"/>
+          <img class="roulette_img moji moji_x_sa moji_y_4" src="./img/empty.png" alt="セ(ゼ)"/>
+          <img class="roulette_img moji moji_x_sa moji_y_5" src="./img/empty.png" alt="ソ(ゾ)"/>
+          <img class="roulette_img moji moji_x_ta moji_y_1" src="./img/empty.png" alt="タ(ダ)"/>
+          <img class="roulette_img moji moji_x_ta moji_y_2" src="./img/empty.png" alt="チ(ヂ)"/>
+          <img class="roulette_img moji moji_x_ta moji_y_3" src="./img/empty.png" alt="ツ(ヅ)"/>
+          <img class="roulette_img moji moji_x_ta moji_y_4" src="./img/empty.png" alt="テ(デ)"/>
+          <img class="roulette_img moji moji_x_ta moji_y_5" src="./img/empty.png" alt="ト(ド)"/>
+          <img class="roulette_img moji moji_x_na moji_y_1" src="./img/empty.png" alt="ナ"/>
+          <img class="roulette_img moji moji_x_na moji_y_2" src="./img/empty.png" alt="ニ"/>
+          <img class="roulette_img moji moji_x_na moji_y_3" src="./img/empty.png" alt="ヌ"/>
+          <img class="roulette_img moji moji_x_na moji_y_4" src="./img/empty.png" alt="ネ"/>
+          <img class="roulette_img moji moji_x_na moji_y_5" src="./img/empty.png" alt="ノ"/>
+          <img class="roulette_img moji moji_x_ha moji_y_1" src="./img/empty.png" alt="ハ(バ、パ)"/>
+          <img class="roulette_img moji moji_x_ha moji_y_2" src="./img/empty.png" alt="ヒ(ビ、ピ)"/>
+          <img class="roulette_img moji moji_x_ha moji_y_3" src="./img/empty.png" alt="フ(ブ、プ)"/>
+          <img class="roulette_img moji moji_x_ha moji_y_4" src="./img/empty.png" alt="ヘ(ベ、ペ)"/>
+          <img class="roulette_img moji moji_x_ha moji_y_5" src="./img/empty.png" alt="ホ(ボ、ポ)"/>
+          <img class="roulette_img moji moji_x_ma moji_y_1" src="./img/empty.png" alt="マ"/>
+          <img class="roulette_img moji moji_x_ma moji_y_2" src="./img/empty.png" alt="ミ"/>
+          <img class="roulette_img moji moji_x_ma moji_y_3" src="./img/empty.png" alt="ム"/>
+          <img class="roulette_img moji moji_x_ma moji_y_4" src="./img/empty.png" alt="メ"/>
+          <img class="roulette_img moji moji_x_ma moji_y_5" src="./img/empty.png" alt="モ"/>
+          <img class="roulette_img moji moji_x_ya moji_y_1" src="./img/empty.png" alt="ヤ"/>
+          <img class="roulette_img moji moji_x_ya moji_y_3" src="./img/empty.png" alt="ユ"/>
+          <img class="roulette_img moji moji_x_ya moji_y_5" src="./img/empty.png" alt="ヨ"/>
+          <img class="roulette_img moji moji_x_ra moji_y_1" src="./img/empty.png" alt="ラ"/>
+          <img class="roulette_img moji moji_x_ra moji_y_2" src="./img/empty.png" alt="リ"/>
+          <img class="roulette_img moji moji_x_ra moji_y_3" src="./img/empty.png" alt="ル"/>
+          <img class="roulette_img moji moji_x_ra moji_y_4" src="./img/empty.png" alt="レ"/>
+          <img class="roulette_img moji moji_x_ra moji_y_5" src="./img/empty.png" alt="ロ"/>
+          <img class="roulette_img moji moji_x_wa moji_y_1" src="./img/empty.png" alt="ワ"/>
+        </div>
+      </div>
+      <div class="result_container"></div>
+      <div class="btn_container">
+        <div class="btn_container_inner start">
+          <div class="btn start"></div>
+        </div>
+        <div class="btn_container_inner stop">
+          <div class="btn stop"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

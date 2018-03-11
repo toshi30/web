@@ -1,0 +1,47 @@
+﻿html, body{
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", "Lucida Grande", Verdana, "ＭＳ Ｐゴシック", sans-serif;
+}
+
+body{
+  background-color: #F7F9FE;
+}
+
+#mainArea{
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+#flipbook{
+  width: 100%;
+  height: 100%;
+}
+
+#flipbook div{
+  width: 100%;
+  height: 100%;
+}
+
+#flipbook .slide{
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  background-size:contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+#flipbook .slide1{ background-image: url("../img/slide1.JPG"); }
+#flipbook .slide2{ background-image: url("../img/slide2.JPG"); }
+#flipbook .slide3{ background-image: url("../img/slide3.JPG"); }
+#flipbook .slide4{ background-image: url("../img/slide4.JPG"); }
+#flipbook .slide5{ background-image: url("../img/slide5.JPG"); }
+#flipbook .slide6{ background-image: url("../img/slide6.JPG"); }
+#flipbook .slide7{ background-image: url("../img/slide7.JPG"); }
+#flipbook .slide8{ background-image: url("../img/slide8.JPG"); }
+#flipbook .slide9{ background-image: url("../img/slide9.JPG"); }
+#flipbook .slide10{ background-image: url("../img/slide10.JPG"); }
+

@@ -3,6 +3,7 @@
     width: 100%;
     height: 25px;
     z-index: 100;
+    top:0px;
 }
 
 #menuArea ul {
@@ -15,7 +16,7 @@
 }
 
 #menuArea a {
-    font-size: 13px;
+    font-size: 12px;
     text-decoration: none;
     color: #000000;    
 }
@@ -26,17 +27,12 @@
     width: 25%;
     margin: 0;
     box-sizing: border-box;
-    border-right: solid 1px gray;
-    border-left: solid 1px gray;
-    border-bottom: solid 2px gray;
-
+    border-right: solid 1px DarkGray;
+    border-bottom: solid 1px DarkGray;
 }
 
-#menuArea > ul > li > ul > li {
-    border-right: solid 1px gray;
-    border-left: solid 1px gray;
-    border-top: solid 1px gray;
-    border-bottom: solid 1px gray;
+#menuArea > ul > li:last-child {
+    border-right: none;
 }
 
 #menuArea > ul > li > a {
@@ -47,53 +43,70 @@
     text-align: center;
 }
 
-li.color-blue {
+#menuArea li.color-blue {
     border-top: 3px solid #3FC6F3;
 }
 
-li.color-red {
+#menuArea li.color-red {
     border-top: 3px solid #FF625F;
 }
 
-li.color-yellow {
+#menuArea li.color-yellow {
     border-top: 3px solid #FEBD01;
 }
 
-li.color-green {
+#menuArea li.color-green {
     border-top: 3px solid #46D7C6;
 }
 
-ul.subs {
+#menuArea ul.subs {
     position: absolute;
     top: 100%;
     width: 100%;
+    left: -1px;
     background-color: #FFFFFF;
+    border-left: solid 1px DarkGray ;
+    border-right: solid 1px DarkGray ;
+    border-bottom: solid 1px DarkGray ;
 }
 
-ul.subs li a {
+#menuArea > ul > li:first-child ul.subs {
+    left: 0px;
+    border-left: none;
+}
+
+#menuArea > ul > li:last-child ul.subs {
+    border-right: none;
+}
+
+#menuArea ul.subs li {
+    border-top: solid 1px DarkGray ;
+}
+
+#menuArea ul.subs li a {
     display: block;
     height: 22px;
     background-color: #FFFFFF;
     line-height: 22px;
-    text-indent: 10%;
+    text-indent: 3px;
 }
 
-li.color-blue ul.subs li a:hover {
+#menuArea li.color-blue ul.subs li a:hover {
     background-color: #3FC6F3;
     color: #FFFFFF;
 }
 
-li.color-red ul.subs li a:hover {
+#menuArea li.color-red ul.subs li a:hover {
     background-color: #FF625F;
     color: #FFFFFF;
 }
 
-li.color-yellow ul.subs li a:hover {
+#menuArea li.color-yellow ul.subs li a:hover {
     background-color: #FEBD01;
     color: #FFFFFF;
 }
 
-li.color-green ul.subs li a:hover {
+#menuArea li.color-green ul.subs li a:hover {
     background-color: #46D7C6;
     color: #FFFFFF;
 }
